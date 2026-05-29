@@ -20,19 +20,17 @@ import Layout from '../layouts/Layout.astro';
   .nav-logo {
     font-family: var(--font-mono);
     font-size: 15px;
-    color: var(--fg);
+    letter-spacing: -0.01em;
+    background: linear-gradient(90deg,
+      #6366f1 0%, #818cf8 18%, #a78bfa 35%, #c4b5fd 50%,
+      #a78bfa 65%, #818cf8 82%, #6366f1 100%);
+    background-size: 280% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: logoFlow 7s ease-in-out infinite;
   }
-  .nav-logo-dot { color: var(--accent); }
-  .nav-back {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--fg-3);
-    text-transform: uppercase;
-    display: flex; align-items: center; gap: 6px;
-    transition: color 0.2s ease;
-  }
-  .nav-back:hover { color: var(--fg); }
   @media (max-width: 640px) { #nav { padding: 0 1.5rem; } }
 
   /* ── Main ── */
@@ -148,9 +146,12 @@ import Layout from '../layouts/Layout.astro';
   .footer-logo {
     font-family: var(--font-mono);
     font-size: 13px;
-    color: var(--fg-2);
+    background: linear-gradient(90deg, #6366f1 0%, #818cf8 50%, #6366f1 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: logoFlow 7s ease-in-out infinite;
   }
-  .footer-logo-dot { color: var(--accent); }
   .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
   @media (max-width: 640px) {
     footer { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
@@ -159,14 +160,7 @@ import Layout from '../layouts/Layout.astro';
 
 <!-- Nav -->
 <nav id="nav">
-  <a href="/" class="nav-logo">KN<span class="nav-logo-dot">.</span>dev</a>
-  <a href="/" class="nav-back">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="19" y1="12" x2="5" y2="12"/>
-      <polyline points="12 19 5 12 12 5"/>
-    </svg>
-    Back
-  </a>
+  <a href="/" class="nav-logo">KN.dev</a>
 </nav>
 
 <!-- Main content -->
@@ -246,7 +240,7 @@ import Layout from '../layouts/Layout.astro';
 </main>
 
 <footer>
-  <span class="footer-logo">KN<span class="footer-logo-dot">.</span>dev</span>
+  <span class="footer-logo">KN.dev</span>
   <span class="footer-copy">&copy; 2025 KN.dev</span>
 </footer>
 </Layout>
