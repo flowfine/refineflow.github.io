@@ -1,92 +1,252 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="特定商取引法に基づく表記 | Your Company">
+
+<Layout
+  title="特定商取引法に基づく表記 | KN.dev"
+  description="特定商取引法に基づく表記ページ"
+>
 <style>
-  nav {
+  /* ── Nav ── */
+  #nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 0 3rem; height: 56px;
+    height: 60px; padding: 0 3rem;
     display: flex; align-items: center; justify-content: space-between;
-    background: var(--bg); border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid var(--border);
   }
-  .nav-logo { font-family: var(--font-display); font-size: 14px; font-weight: 700; }
-  .nav-logo span { color: var(--accent); }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--fg);
+  }
+  .nav-logo-dot { color: var(--accent); }
   .nav-back {
-    font-family: var(--font-display); font-size: 12px; font-weight: 400;
-    letter-spacing: 0.08em; color: var(--fg-2); text-transform: uppercase;
-    transition: color 0.2s;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--fg-3);
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s ease;
   }
   .nav-back:hover { color: var(--fg); }
+  @media (max-width: 640px) { #nav { padding: 0 1.5rem; } }
 
-  main { max-width: 900px; margin: 0 auto; padding: 112px 3rem 96px; }
-
-  .section-head {
-    display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem;
+  /* ── Main ── */
+  main {
+    max-width: 780px; margin: 0 auto;
+    padding: 100px 3rem 96px;
   }
-  .section-num { font-family: var(--font-display); font-size: 11px; color: var(--fg-3); }
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(28px, 4vw, 48px); font-weight: 800; letter-spacing: -0.03em; line-height: 1;
+  @media (max-width: 640px) { main { padding: 88px 1.5rem 64px; } }
+
+  /* ── Page header ── */
+  .page-header { margin-bottom: 4rem; }
+  .page-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .page-title {
+    font-family: var(--font-serif), var(--font-mono);
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .page-subtitle {
+    font-size: 13px;
+    color: var(--fg-3);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
   }
 
-  .legal-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  .legal-table tr { border-bottom: 1px solid var(--border); }
-  .legal-table tr:first-child { border-top: 1px solid var(--border); }
-  .legal-table th {
-    font-family: var(--font-display); font-size: 10px;
-    letter-spacing: 0.1em; color: var(--fg-3); text-transform: uppercase;
-    font-weight: 400; text-align: left; padding: 1.25rem 1.5rem 1.25rem 0;
-    width: 180px; vertical-align: top;
+  /* ── Table ── */
+  .legal-table {
+    width: 100%;
+    border-collapse: collapse;
   }
-  .legal-table td { padding: 1.25rem 0; color: var(--fg-2); line-height: 1.8; }
-  .legal-table a { color: var(--accent); border-bottom: 1px solid transparent; transition: border-color 0.2s; }
-  .legal-table a:hover { border-color: var(--accent); }
-
-  footer {
-    max-width: 900px; margin: 0 auto; padding: 2rem 3rem;
+  .legal-table tr {
+    border-bottom: 1px solid var(--border);
+  }
+  .legal-table tr:first-child {
     border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
   }
-  .footer-logo { font-family: var(--font-display); font-size: 13px; font-weight: 700; }
-  .footer-logo span { color: var(--accent); }
-  .footer-copy { font-size: 12px; color: var(--fg-3); }
+  .legal-table th {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-3);
+    font-weight: 400;
+    text-align: left;
+    padding: 1.4rem 2rem 1.4rem 0;
+    width: 200px;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+  .legal-table td {
+    padding: 1.4rem 0;
+    font-size: 14px;
+    color: var(--fg-2);
+    line-height: 1.9;
+  }
+  .legal-table a {
+    color: var(--accent);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .legal-table a:hover {
+    border-color: var(--accent);
+    color: var(--accent-bright);
+  }
+  @media (max-width: 560px) {
+    .legal-table, .legal-table tbody, .legal-table tr,
+    .legal-table th, .legal-table td {
+      display: block;
+    }
+    .legal-table tr { padding: 1.25rem 0; }
+    .legal-table tr:first-child { border-top: 1px solid var(--border); }
+    .legal-table th {
+      width: auto;
+      padding: 0 0 0.3rem 0;
+      white-space: normal;
+    }
+    .legal-table td { padding: 0; }
+  }
 
-  @media (max-width: 700px) {
-    nav { padding: 0 1.5rem; }
-    main { padding: 88px 1.5rem 60px; }
-    .legal-table th { width: 120px; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  /* ── Note ── */
+  .legal-note {
+    margin-top: 3rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--fg-3);
+    line-height: 1.9;
+    font-family: var(--font-mono);
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Footer ── */
+  footer {
+    max-width: 780px; margin: 0 auto;
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .footer-logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--fg-2);
+  }
+  .footer-logo-dot { color: var(--accent); }
+  .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+  @media (max-width: 640px) {
+    footer { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
   }
 </style>
 
-<nav>
-  <span class="nav-logo">Your<span>/</span>Company</span>
-  <a class="nav-back" href="/">← Back</a>
+<!-- Nav -->
+<nav id="nav">
+  <a href="/" class="nav-logo">KN<span class="nav-logo-dot">.</span>dev</a>
+  <a href="/" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12"/>
+      <polyline points="12 19 5 12 12 5"/>
+    </svg>
+    Back
+  </a>
 </nav>
 
+<!-- Main content -->
 <main>
-  <div class="section-head reveal">
-    <span class="section-num">—</span>
-    <h1 class="section-title">LEGAL</h1>
-  </div>
+  <header class="page-header reveal">
+    <span class="page-eyebrow">Legal</span>
+    <h1 class="page-title">特定商取引法に基づく表記</h1>
+    <p class="page-subtitle">Specified Commercial Transactions Act</p>
+  </header>
+
   <table class="legal-table">
     <tbody>
-      <tr class="reveal"><th>販売事業者</th><td>Your Company</td></tr>
-      <tr class="reveal"><th>代表者</th><td>請求があった場合、遅滞なく開示いたします</td></tr>
-      <tr class="reveal"><th>所在地</th><td>請求があった場合、遅滞なく開示いたします</td></tr>
-      <tr class="reveal"><th>電話番号</th><td>請求があった場合、遅滞なく開示いたします</td></tr>
-      <tr class="reveal"><th>メールアドレス</th><td><a href="mailto:your@email.com">your@email.com</a></td></tr>
-      <tr class="reveal"><th>販売価格</th><td>各アプリ・サービスのページに記載</td></tr>
-      <tr class="reveal"><th>支払方法</th><td>各プラットフォーム（App Store / Google Play / Steam）の決済方法に準拠</td></tr>
-      <tr class="reveal"><th>商品の引渡時期</th><td>購入手続き完了後、ただちにダウンロード可能</td></tr>
-      <tr class="reveal"><th>返品・キャンセル</th><td>各プラットフォームの規約に準拠</td></tr>
-      <tr class="reveal"><th>動作環境</th><td>各アプリ・サービスのページに記載</td></tr>
+      <tr class="reveal" data-delay="0.05">
+        <th>販売事業者</th>
+        <td>KN.dev（個人事業）</td>
+      </tr>
+      <tr class="reveal" data-delay="0.1">
+        <th>代表者</th>
+        <td>請求があった場合、遅滞なく開示いたします</td>
+      </tr>
+      <tr class="reveal" data-delay="0.15">
+        <th>所在地</th>
+        <td>請求があった場合、遅滞なく開示いたします</td>
+      </tr>
+      <tr class="reveal" data-delay="0.2">
+        <th>電話番号</th>
+        <td>請求があった場合、遅滞なく開示いたします</td>
+      </tr>
+      <tr class="reveal" data-delay="0.25">
+        <th>メールアドレス</th>
+        <td><a href="mailto:info@example.com">info@example.com</a></td>
+      </tr>
+      <tr class="reveal" data-delay="0.3">
+        <th>販売価格</th>
+        <td>各サービス・プロダクトのページに記載、または個別見積による</td>
+      </tr>
+      <tr class="reveal" data-delay="0.35">
+        <th>支払方法</th>
+        <td>銀行振込、各種プラットフォーム（App Store / Google Play）の決済に準拠</td>
+      </tr>
+      <tr class="reveal" data-delay="0.4">
+        <th>支払時期</th>
+        <td>請求書発行日から30日以内、またはプラットフォームの規約に準拠</td>
+      </tr>
+      <tr class="reveal" data-delay="0.45">
+        <th>商品の引渡時期</th>
+        <td>
+          受託開発：契約締結後、別途協議の上定める期日<br/>
+          アプリ・デジタル商品：購入手続き完了後、ただちに提供
+        </td>
+      </tr>
+      <tr class="reveal" data-delay="0.5">
+        <th>返品・キャンセル</th>
+        <td>
+          受託開発：業務着手前であればキャンセル可能。着手後は別途協議。<br/>
+          デジタル商品：各プラットフォームの規約に準拠
+        </td>
+      </tr>
+      <tr class="reveal" data-delay="0.55">
+        <th>動作環境</th>
+        <td>各アプリ・サービスのページに記載</td>
+      </tr>
+      <tr class="reveal" data-delay="0.6">
+        <th>その他</th>
+        <td>
+          価格はすべて税込表示です。<br/>
+          詳細はご契約時の個別合意書に準拠します。
+        </td>
+      </tr>
     </tbody>
   </table>
+
+  <div class="legal-note reveal" data-delay="0.65">
+    本ページに記載の内容は予告なく変更する場合があります。<br/>
+    ご不明な点がございましたら <a href="mailto:info@example.com">info@example.com</a> までお問い合わせください。
+  </div>
 </main>
 
 <footer>
-  <span class="footer-logo">Your<span>/</span>Company</span>
-  <span class="footer-copy">© 2025 Your Company</span>
+  <span class="footer-logo">KN<span class="footer-logo-dot">.</span>dev</span>
+  <span class="footer-copy">&copy; 2025 KN.dev</span>
 </footer>
 </Layout>
