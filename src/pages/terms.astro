@@ -1,0 +1,310 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="利用規約 | Flowfine Works"
+  description="アプリ「やること」の利用規約"
+>
+<style>
+  /* ── Nav ── */
+  #nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 60px; padding: 0 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 9px;
+  }
+  .nav-logo-text {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg,
+      #3b82f6 0%, #60a5fa 18%, #93c5fd 35%, #bfdbfe 50%,
+      #93c5fd 65%, #60a5fa 82%, #3b82f6 100%);
+    background-size: 280% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: logoFlow 7s ease-in-out infinite;
+  }
+  @media (max-width: 640px) { #nav { padding: 0 1.5rem; } }
+
+  /* ── Main ── */
+  main {
+    max-width: 780px; margin: 0 auto;
+    padding: 100px 3rem 96px;
+  }
+  @media (max-width: 640px) { main { padding: 88px 1.5rem 64px; } }
+
+  /* ── Page header ── */
+  .page-header { margin-bottom: 4rem; }
+  .page-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .page-title {
+    font-family: var(--font-serif), var(--font-mono);
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .page-subtitle {
+    font-size: 13px;
+    color: var(--fg-3);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Content ── */
+  .doc-section { margin-bottom: 2.5rem; }
+  .doc-section:first-child { border-top: 1px solid var(--border); padding-top: 2.5rem; }
+
+  .doc-heading {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.85rem;
+    display: block;
+  }
+  .doc-subheading {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--fg);
+    margin: 1.25rem 0 0.5rem;
+  }
+  .doc-section p {
+    font-size: 14px;
+    color: var(--fg-2);
+    line-height: 1.95;
+    margin: 0 0 0.75rem;
+  }
+  .doc-section ul {
+    font-size: 14px;
+    color: var(--fg-2);
+    line-height: 1.95;
+    padding-left: 1.25rem;
+    margin: 0 0 0.75rem;
+  }
+  .doc-section ul li { margin-bottom: 0.2rem; }
+  .doc-section a {
+    color: var(--accent);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .doc-section a:hover { border-color: var(--accent); }
+
+  .doc-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  /* ── Note ── */
+  .legal-note {
+    margin-top: 3rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--fg-3);
+    line-height: 1.9;
+    font-family: var(--font-mono);
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Footer ── */
+  footer {
+    max-width: 780px; margin: 0 auto;
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .footer-logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .footer-logo-text {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #3b82f6 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: logoFlow 7s ease-in-out infinite;
+  }
+  .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+  .footer-back-wrap {
+    max-width: 780px; margin: 0 auto;
+    padding: 0 3rem 1.5rem;
+  }
+  .footer-back {
+    font-family: var(--font-mono); font-size: 11px; color: var(--fg-3);
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    transition: color 0.2s ease;
+  }
+  .footer-back:hover { color: var(--accent); }
+  @media (max-width: 640px) {
+    footer { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
+    .footer-back-wrap { padding: 0 1.5rem 1.25rem; }
+  }
+</style>
+
+<!-- Nav -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <svg width="22" height="22" viewBox="0 0 128 128" aria-hidden="true" style="flex-shrink:0">
+      <rect width="128" height="128" rx="26" fill="#0d1829"/>
+      <rect x="30" y="27" width="14" height="74" rx="4" fill="#60a5fa"/>
+      <rect x="30" y="27" width="68" height="14" rx="4" fill="#60a5fa"/>
+      <rect x="30" y="57" width="52" height="14" rx="4" fill="#60a5fa"/>
+    </svg>
+    <span class="nav-logo-text">Flowfine Works</span>
+  </a>
+</nav>
+
+<!-- Main content -->
+<main>
+  <header class="page-header reveal">
+    <span class="page-eyebrow">Terms of Service</span>
+    <h1 class="page-title">利用規約</h1>
+    <p class="page-subtitle">最終更新日：2026年6月4日</p>
+  </header>
+
+  <div class="doc-section reveal" data-delay="0.05">
+    <span class="doc-heading">1. 総則</span>
+    <p>本利用規約（以下「本規約」）は、Flowfine Works（以下「当社」）が提供するアプリ「やること」（以下「本アプリ」）の利用条件を定めるものです。本アプリをダウンロードまたはご利用いただくことで、本規約に同意したものとみなします。本規約に同意いただけない場合は、本アプリの利用をお控えください。</p>
+  </div>
+
+  <hr class="doc-divider"/>
+
+  <div class="doc-section reveal" data-delay="0.1">
+    <span class="doc-heading">2. 利用資格</span>
+    <p>本アプリは、Apple App Store または Google Play ストアからダウンロードできます。ご利用にあたっては、各ストアの利用規約に同意していただく必要があります。13歳未満の方は、保護者の同意を得た上でご利用ください。</p>
+  </div>
+
+  <hr class="doc-divider"/>
+
+  <div class="doc-section reveal" data-delay="0.15">
+    <span class="doc-heading">3. アプリ内課金</span>
+    <p>本アプリは、特定の機能に対してアプリ内課金（サブスクリプションを含む）を提供しています。</p>
+    <ul>
+      <li>購入はお客様の Apple ID または Google アカウントに請求されます</li>
+      <li>サブスクリプションは、各課金期間終了の24時間前までに解約しない限り自動更新されます</li>
+      <li>自動更新の停止は、各ストアのアカウント設定から行えます</li>
+      <li>購入の確定後の返金は、各ストアの規約に準拠します</li>
+      <li>無料トライアル期間中に解約しない場合、有料プランへ移行します</li>
+    </ul>
+  </div>
+
+  <hr class="doc-divider"/>
+
+  <div class="doc-section reveal" data-delay="0.2">
+    <span class="doc-heading">4. 禁止事項</span>
+    <p>本アプリの利用にあたり、以下の行為を禁止します。</p>
+    <ul>
+      <li>本アプリのリバースエンジニアリング、逆コンパイル、逆アセンブル</li>
+      <li>本アプリを通じた違法行為または公序良俗に反する行為</li>
+      <li>当社または第三者の知的財産権、プライバシーその他の権利を侵害する行為</li>
+      <li>本アプリのサーバーやネットワークに過度な負荷をかける行為</li>
+      <li>本アプリの正常な運用を妨げる行為</li>
+      <li>その他、当社が不適切と判断する行為</li>
+    </ul>
+  </div>
+
+  <hr class="doc-divider"/>
+
+  <div class="doc-section reveal" data-delay="0.25">
+    <span class="doc-heading">5. 知的財産権</span>
+    <p>本アプリおよびそのコンテンツ（テキスト、画像、デザイン、ロゴ等）に関する著作権・商標権その他の知的財産権は、当社または正当な権利者に帰属します。本規約は、お客様に対してそれらの知的財産権を譲渡または使用許諾するものではありません。</p>
+  </div>
+
+  <hr class="doc-divider"/>
+
+  <div class="doc-section reveal" data-delay="0.3">
+    <span class="doc-heading">6. 免責事項</span>
+    <p>本アプリは「現状有姿」で提供されます。当社は、本アプリの完全性・正確性・有用性・特定目的への適合性について、明示または黙示を問わず一切の保証をしません。</p>
+    <p>本アプリのご利用、または利用不能によって生じた直接的・間接的・偶発的・特別・派生的損害について、当社は一切の責任を負いません。</p>
+  </div>
+
+  <hr class="doc-divider"/>
+
+  <div class="doc-section reveal" data-delay="0.35">
+    <span class="doc-heading">7. サービスの変更・終了</span>
+    <p>当社は、お客様への事前通知なく、本アプリの内容変更、機能の追加・削除、またはサービスの一時停止・終了を行うことがあります。これによって生じた損害について、当社は責任を負いません。</p>
+  </div>
+
+  <hr class="doc-divider"/>
+
+  <div class="doc-section reveal" data-delay="0.4">
+    <span class="doc-heading">8. 準拠法・管轄裁判所</span>
+    <p>本規約は日本法に準拠し、解釈されます。本規約に関する一切の紛争については、東京地方裁判所を第一審の専属的合意管轄裁判所とします。</p>
+  </div>
+
+  <hr class="doc-divider"/>
+
+  <div class="doc-section reveal" data-delay="0.45">
+    <span class="doc-heading">9. 規約の変更</span>
+    <p>当社は、必要に応じて本規約を変更することがあります。変更後の規約は、アプリ内またはウェブサイト上に掲示した時点で効力を生じます。変更後も本アプリをご利用いただくことで、改定後の規約に同意したものとみなします。</p>
+  </div>
+
+  <hr class="doc-divider"/>
+
+  <div class="doc-section reveal" data-delay="0.5">
+    <span class="doc-heading">10. お問い合わせ</span>
+    <p>本規約に関するご質問・ご要望は、以下までお問い合わせください。</p>
+    <ul>
+      <li>事業者名：Flowfine Works</li>
+      <li>メールアドレス：<a href="mailto:contact@flowfine.dev">contact@flowfine.dev</a></li>
+    </ul>
+  </div>
+
+  <div class="legal-note reveal" data-delay="0.55">
+    本規約に記載の内容は予告なく変更する場合があります。ご不明な点がございましたら <a href="mailto:contact@flowfine.dev">contact@flowfine.dev</a> までお問い合わせください。
+  </div>
+</main>
+
+<div class="footer-back-wrap">
+  <a href="/" class="footer-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    Back
+  </a>
+</div>
+
+<footer>
+  <span class="footer-logo">
+    <svg width="18" height="18" viewBox="0 0 128 128" aria-hidden="true" style="flex-shrink:0">
+      <rect width="128" height="128" rx="26" fill="#0d1829"/>
+      <rect x="30" y="27" width="14" height="74" rx="4" fill="#60a5fa"/>
+      <rect x="30" y="27" width="68" height="14" rx="4" fill="#60a5fa"/>
+      <rect x="30" y="57" width="52" height="14" rx="4" fill="#60a5fa"/>
+    </svg>
+    <span class="footer-logo-text">Flowfine Works</span>
+  </span>
+  <span class="footer-copy">&copy; 2026 Flowfine Works All rights reserved.</span>
+</footer>
+</Layout>
